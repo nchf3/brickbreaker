@@ -123,6 +123,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &125260886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7033702796298409120, guid: 34686a59bd744184cb4985cb434b0815, type: 3}
+  m_PrefabInstance: {fileID: 7033702796255723766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &125260892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125260886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae01101c6314c04ebff5d607cb4f917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball_speed: 5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +242,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6165076130740958142, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 789809519233069860, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -369,6 +391,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6165076130740958142, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 789809519233069860, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -430,6 +456,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6165076130740958142, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 789809519233069860, guid: 9ec9e35a6f94980418f730bf9dc947d7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -645,6 +675,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4741569936347546138, guid: 34686a59bd744184cb4985cb434b0815, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 7033702796298409120, guid: 34686a59bd744184cb4985cb434b0815, type: 3}
       propertyPath: m_Name
       value: Ball
