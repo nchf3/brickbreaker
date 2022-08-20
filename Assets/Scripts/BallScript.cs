@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class BallScript : MonoBehaviour
 {   
     // ball parameters
-    private bool ball_launch = false;
+    private bool ball_start = false;
     private Vector3 ball_initial_velocity = Vector3.forward * ball_speed;
     private Vector3 ball_last_velocity;
     private Rigidbody ball_rb; 
@@ -28,12 +30,12 @@ public class BallScript : MonoBehaviour
     void Update()
     {
         // launch the ball when starting condition is detected
-        if(!ball_launch)
+        if(!ball_start)
         {
             // detect starting condition
             if(Input.GetKey("space"))
             {
-                ball_launch = true; 
+                ball_start = true; 
                 // ball initial velocity
                 ball_rb.velocity = ball_initial_velocity;
             }
@@ -52,6 +54,8 @@ public class BallScript : MonoBehaviour
             if(ui.check_score())
             {
                 Debug.Log("WIN : we destroyed all bricks");
+
+                SceneManager.LoadScene("Scenes/win_menu");
             }
         }
     }
@@ -97,7 +101,7 @@ public class BallScript : MonoBehaviour
     private void game_reset()
     {
         // reset the starting condition
-        ball_launch = false;
+        ball_start = false;
 
         // activate destroyed bricks
         foreach(GameObject brick in destroyed_bricks)
