@@ -17,6 +17,8 @@ public class BallScript : MonoBehaviour
     private int destroyed_bricks_count = 0;
     private const int bricks_count = 6;
 
+    public UiScript ui;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,9 @@ public class BallScript : MonoBehaviour
 
                 // increase destroyed brick counter
                 destroyed_bricks_count += 1;
+
+                // compute new score
+                compute_score();
             }
 
             // check if we win the game
@@ -111,5 +116,10 @@ public class BallScript : MonoBehaviour
 
         // clear the destroyed brick list
         destroyed_bricks.Clear();
+    }
+
+    private void compute_score()
+    {
+        ui.increase_score();
     }
 }
