@@ -20,7 +20,7 @@ public class BrickScript : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // hide the brick
-        gameObject.active = false;
+        Destroy(gameObject);
 
         // increase the player score
     }
