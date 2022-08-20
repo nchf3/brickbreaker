@@ -14,9 +14,8 @@ public class BallScript : MonoBehaviour
     public Transform paddle;
 
     private List<GameObject> destroyed_bricks = new List<GameObject>();
-    private int destroyed_bricks_count = 0;
-    private const int bricks_count = 6;
 
+    private const int score_max = 12;
     public UiScript ui;
 
     // Start is called before the first frame update
@@ -48,6 +47,12 @@ public class BallScript : MonoBehaviour
         {
             // get ball velocity
             ball_last_velocity = ball_rb.velocity;
+
+            // check if we win the game
+            if(ui.check_score())
+            {
+                Debug.Log("WIN : we destroyed all bricks");
+            }
         }
     }
 
@@ -68,22 +73,13 @@ public class BallScript : MonoBehaviour
             // delete the game object if we collide with a brick
             if(collision.gameObject.tag == "brick")
             {
+                // compute new score
+                update_score(collision);
+
                 // save the object
                 destroyed_bricks.Add(GameObject.Find(collision.gameObject.name));
                 // hide the object
                 collision.gameObject.SetActive(false);
-
-                // increase destroyed brick counter
-                destroyed_bricks_count += 1;
-
-                // compute new score
-                compute_score();
-            }
-
-            // check if we win the game
-            if(destroyed_bricks_count == bricks_count)
-            {
-                Debug.Log("WIN : we destroyed all bricks");
             }
         }
     }
@@ -100,13 +96,8 @@ public class BallScript : MonoBehaviour
     // method to reset game parameters
     private void game_reset()
     {
-        Debug.Log("Reset the game");
-
         // reset the starting condition
         ball_launch = false;
-
-        // reset brick count
-        destroyed_bricks_count = 0;
 
         // activate destroyed bricks
         foreach(GameObject brick in destroyed_bricks)
@@ -116,10 +107,33 @@ public class BallScript : MonoBehaviour
 
         // clear the destroyed brick list
         destroyed_bricks.Clear();
+
+        // reset the score
+        ui.reset_score();
     }
 
-    private void compute_score()
+    // update the score according to the destroyed brick
+    private void update_score(Collision collision)
     {
-        ui.increase_score();
+        // identify brick material
+        Renderer renderer = collision.gameObject.GetComponent<Renderer>();
+
+        switch(renderer.material.name)
+        {
+            case "Brick_1 (Instance)":
+                ui.increase_score(1);
+                break;
+            
+            case "Brick_2 (Instance)":
+                ui.increase_score(2);
+                break;
+
+            case "Brick_3 (Instance)":
+                ui.increase_score(3);
+                break;
+
+            default:
+                break;
+        }
     }
 }
