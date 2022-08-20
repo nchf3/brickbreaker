@@ -48,9 +48,18 @@ public class BallScript : MonoBehaviour
     // detect a collision with the ball
     void OnCollisionEnter(Collision collision)
     {
-        // compute new ball direction
-        Vector3 bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
- 
-        ball_rb.velocity = bounce_direction * ball_speed;
+        // check if the ball collide with the bottom of the game area
+        if(collision.gameObject.name == "Edge_bottom")
+        {
+            // reset the game
+            ball_launch = false;
+        }
+        else
+        {
+            // compute new ball direction
+            Vector3 bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
+            // compute new velocity vector
+            ball_rb.velocity = bounce_direction * ball_speed;
+        }
     }
 }
