@@ -13,6 +13,10 @@ public class BallScript : MonoBehaviour
     public const float ball_speed = 5f;
     public Transform paddle;
 
+    private List<GameObject> destroyed_bricks = new List<GameObject>();
+    private int destroyed_bricks_count = 0;
+    private const int bricks_count = 6;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,14 +56,60 @@ public class BallScript : MonoBehaviour
         if(collision.gameObject.name == "Edge_bottom")
         {
             // reset the game
-            ball_launch = false;
+            game_reset();
         }
         else
         {
-            // compute new ball direction
-            Vector3 bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
-            // compute new velocity vector
-            ball_rb.velocity = bounce_direction * ball_speed;
+            // compute the bounce vector
+            bounce(ref ball_rb, ref collision);
+
+            // delete the game object if we collide with a brick
+            if(collision.gameObject.tag == "brick")
+            {
+                // save the object
+                destroyed_bricks.Add(GameObject.Find(collision.gameObject.name));
+                // hide the object
+                collision.gameObject.SetActive(false);
+
+                // increase destroyed brick counter
+                destroyed_bricks_count += 1;
+            }
+
+            // check if we win the game
+            if(destroyed_bricks_count == bricks_count)
+            {
+                Debug.Log("WIN : we destroyed all bricks");
+            }
         }
+    }
+
+    // method to compute the bounce vector 
+    private void bounce(ref Rigidbody ball_rb, ref Collision collision)
+    {
+        // compute new ball direction
+        Vector3 bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
+        // compute new velocity vector
+        ball_rb.velocity = bounce_direction * ball_speed;
+    }
+
+    // method to reset game parameters
+    private void game_reset()
+    {
+        Debug.Log("Reset the game");
+
+        // reset the starting condition
+        ball_launch = false;
+
+        // reset brick count
+        destroyed_bricks_count = 0;
+
+        // activate destroyed bricks
+        foreach(GameObject brick in destroyed_bricks)
+        {
+            brick.SetActive(true);
+        }
+
+        // clear the destroyed brick list
+        destroyed_bricks.Clear();
     }
 }
