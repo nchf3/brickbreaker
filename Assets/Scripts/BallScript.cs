@@ -25,6 +25,7 @@ public class BallScript : MonoBehaviour
         {
             ball_launch = true; 
         
+            // ball initial velocity
             ball_rb.velocity = ball_initial_velocity;
         }
 
@@ -35,20 +36,9 @@ public class BallScript : MonoBehaviour
     // detect a collision with the ball
     void OnCollisionEnter(Collision collision)
     {
-        var bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
-
+        // compute new ball direction
+        Vector3 bounce_direction = Vector3.Reflect(ball_last_velocity.normalized, collision.contacts[0].normal);
+ 
         ball_rb.velocity = bounce_direction * ball_speed;
-
-        // Print how many points are colliding with this transform
-        Debug.Log("Points colliding: " + collision.contacts.Length);
-
-        // Print the normal of the first point in the collision.
-        Debug.Log("Normal of the first point: " + collision.contacts[0].normal);
-
-        // Draw a different colored ray for every normal in the collision
-        foreach (var item in collision.contacts)
-        {
-            Debug.DrawRay(item.point, item.normal * 100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f);
-        }
     }
 }
