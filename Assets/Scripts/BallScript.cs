@@ -20,6 +20,9 @@ public class BallScript : MonoBehaviour
     private const int score_max = 12;
     public UiScript ui;
 
+    // for android control
+    private bool start_pressed_state = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +36,14 @@ public class BallScript : MonoBehaviour
         if(!ball_start)
         {
             // detect starting condition
-            if(Input.GetKey("space"))
+            if(Input.GetKey("space") || start_pressed_state)
             {
+                // do this just once
                 ball_start = true; 
+
+                // reset pressed button on android
+                start_pressed_state = false;
+
                 // ball initial velocity
                 ball_rb.velocity = ball_initial_velocity;
             }
@@ -139,5 +147,10 @@ public class BallScript : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void start_pressed()
+    {
+        start_pressed_state = true;
     }
 }
