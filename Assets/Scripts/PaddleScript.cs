@@ -9,6 +9,9 @@ public class PaddleScript : MonoBehaviour
     public float left_limit;
     public float right_limit;
 
+    private bool right_move = false;
+    private bool left_move = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,9 @@ public class PaddleScript : MonoBehaviour
         // move the paddle according with the keyboard arrow
         transform.Translate(Vector3.right * speed * Time.fixedDeltaTime * Input.GetAxis("Horizontal"));
 
+        if(right_move) transform.Translate(Vector3.right * speed * Time.fixedDeltaTime);
+        if(left_move) transform.Translate(Vector3.left * speed * Time.fixedDeltaTime);
+
         // manage the paddle to not cross base limits
         if (transform.position.x >= right_limit)
         {
@@ -37,5 +43,25 @@ public class PaddleScript : MonoBehaviour
             transform.position = new Vector3(left_limit, transform.position.y, transform.position.z);
         }
 
+    }
+
+    public void hold_right()
+    {
+        right_move = true;
+    }
+
+    public void release_right()
+    {
+        right_move = false;
+    }
+
+    public void hold_left()
+    {
+        left_move = true;
+    }
+
+    public void release_left()
+    {
+        left_move = false;
     }
 }
