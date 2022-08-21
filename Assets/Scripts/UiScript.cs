@@ -15,6 +15,8 @@ public class UiScript : MonoBehaviour
 
     // for android control
     private bool start_pressed_state = false;
+    private bool right_move = false;
+    private bool left_move = false;
 
     // get access to ball and paddle components
     public BallScript ball;
@@ -45,7 +47,7 @@ public class UiScript : MonoBehaviour
         }
     }
 
-        // method to reset game parameters
+    // method to reset game parameters
     public void game_reset()
     {
         // reset ball and bricks positions
@@ -55,23 +57,27 @@ public class UiScript : MonoBehaviour
         reset_score();
     }
 
+    // display score on the screen
     private void display_score(int score)
     {
         score_text.text = "Score : " + score; 
     }
 
+    // increase and display the score
     public void increase_score(int add_score)
     {
         score += add_score;
         display_score(score);  
     }
 
+    // reset the score
     public void reset_score()
     {
         score = 0;
         display_score(score);
     }
 
+    // check if the score equals maximum
     public bool check_score()
     {
         if(score >= score_max)
@@ -84,8 +90,50 @@ public class UiScript : MonoBehaviour
         }
     }
 
+    // used by android to launch the ball
     public void start_pressed()
     {
         start_pressed_state = true;
+    }
+
+    // get direction from arrow keys
+    public float get_arrow_direction(){
+        return Input.GetAxis("Horizontal");
+    }
+
+    // use by android to check if a button is pressed
+    public void hold_right()
+    {
+        right_move = true;
+    }
+
+    // use by android to check if a button is pressed
+    public void release_right()
+    {
+        right_move = false;
+    }
+
+    // use by android to check if a button is pressed
+    public void hold_left()
+    {
+        left_move = true;
+    }
+
+    // use by android to check if a button is pressed
+    public void release_left()
+    {
+        left_move = false;
+    }
+
+    // used by paddle component to check if we need to move
+    public bool do_right_move()
+    {
+        return right_move;
+    }
+
+    // used by paddle component to check if we need to move
+    public bool do_left_move()
+    {
+        return left_move;
     }
 }

@@ -367,8 +367,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600812347}
-          m_TargetAssemblyTypeName: PaddleScript, Assembly-CSharp
+        - m_Target: {fileID: 1086604044}
+          m_TargetAssemblyTypeName: UiScript, Assembly-CSharp
           m_MethodName: hold_right
           m_Mode: 1
           m_Arguments:
@@ -383,8 +383,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600812347}
-          m_TargetAssemblyTypeName: PaddleScript, Assembly-CSharp
+        - m_Target: {fileID: 1086604044}
+          m_TargetAssemblyTypeName: UiScript, Assembly-CSharp
           m_MethodName: release_right
           m_Mode: 1
           m_Arguments:
@@ -498,8 +498,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125260892}
-        m_TargetAssemblyTypeName: BallScript, Assembly-CSharp
+      - m_Target: {fileID: 1086604044}
+        m_TargetAssemblyTypeName: UiScript, Assembly-CSharp
         m_MethodName: start_pressed
         m_Mode: 1
         m_Arguments:
@@ -990,8 +990,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600812347}
-          m_TargetAssemblyTypeName: PaddleScript, Assembly-CSharp
+        - m_Target: {fileID: 1086604044}
+          m_TargetAssemblyTypeName: UiScript, Assembly-CSharp
           m_MethodName: hold_left
           m_Mode: 1
           m_Arguments:
@@ -1006,8 +1006,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600812347}
-          m_TargetAssemblyTypeName: PaddleScript, Assembly-CSharp
+        - m_Target: {fileID: 1086604044}
+          m_TargetAssemblyTypeName: UiScript, Assembly-CSharp
           m_MethodName: release_left
           m_Mode: 1
           m_Arguments:
@@ -1667,6 +1667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   score_text: {fileID: 457977758}
+  ball: {fileID: 125260892}
 --- !u!4 &1086604045
 Transform:
   m_ObjectHideFlags: 0
@@ -2135,17 +2136,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1600812347 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 687113655024766891, guid: 1720261a288aa0f458e6ef1e4f076b80, type: 3}
-  m_PrefabInstance: {fileID: 687113655557463435}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67fd45e3b8276d04a8343b2b3b3f92aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1649071662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2614,6 +2604,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 687113655024766891, guid: 1720261a288aa0f458e6ef1e4f076b80, type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 1086604044}
     - target: {fileID: 687113655024766891, guid: 1720261a288aa0f458e6ef1e4f076b80, type: 3}
       propertyPath: speed
       value: 6
