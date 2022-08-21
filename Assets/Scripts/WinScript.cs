@@ -12,4 +12,11 @@ public class WinScript : MonoBehaviour
 
         SceneManager.LoadScene("Scenes/main_scene");
     }
+
+    public void stop_game()
+    {
+        Debug.Log("Stop the game");
+
+        Application.Quit();
+    }
 }
