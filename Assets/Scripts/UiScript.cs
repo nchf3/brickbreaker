@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class UiScript : MonoBehaviour
 {
+    // variables to display text on screen
     public int score = 0;
     public TMP_Text score_text;
 
-    // score to reach to win the game
+    // score to win the game
     private const int score_max = 12;
 
     // for android control

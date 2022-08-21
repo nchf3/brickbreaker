@@ -5,26 +5,17 @@ using UnityEngine;
 
 public class PaddleScript : MonoBehaviour
 {
+    // paddle parameters
     public float speed = 5f;
     public float left_limit;
     public float right_limit;
 
+    // used to acess inputs
     public UiScript ui;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    // Use FixedUpdate to call this method at a fixed frame rate 
-    void FixedUpdate(){
         // move the paddle according with the keyboard arrow
         transform.Translate(Vector3.right * speed * Time.fixedDeltaTime * ui.get_arrow_direction());
 

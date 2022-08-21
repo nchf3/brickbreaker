@@ -10,12 +10,15 @@ public class BallScript : MonoBehaviour
     private Vector3 ball_initial_velocity = Vector3.forward * ball_speed;
     private Vector3 ball_last_velocity;
     private Rigidbody ball_rb; 
-
     public const float ball_speed = 5f;
+
+    // used to follow the paddle position
     public Transform paddle;
 
+    // list to register destroyed bricks
     private List<GameObject> destroyed_bricks = new List<GameObject>();
 
+    // used to update score and reset game
     public UiScript ui;
 
     // Start is called before the first frame update
