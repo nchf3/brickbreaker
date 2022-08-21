@@ -10,12 +10,11 @@ public class PaddleScript : MonoBehaviour
     public float left_limit;
     public float right_limit;
 
-    // used to acess inputs
+    // used to access ui inputs
     public UiScript ui;
 
-    // Update is called once per frame
-    void Update()
-    {
+    // Use FixedUpdate to call this method at a fixed frame rate 
+    void FixedUpdate(){
         // move the paddle according with the keyboard arrow
         transform.Translate(Vector3.right * speed * Time.fixedDeltaTime * ui.get_arrow_direction());
 
