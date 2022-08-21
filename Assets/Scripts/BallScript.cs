@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.SceneManagement;
-
 public class BallScript : MonoBehaviour
 {   
     // ball parameters
+    private bool ball_move = false;
     private bool ball_start = false;
     private Vector3 ball_initial_velocity = Vector3.forward * ball_speed;
     private Vector3 ball_last_velocity;
@@ -17,11 +16,7 @@ public class BallScript : MonoBehaviour
 
     private List<GameObject> destroyed_bricks = new List<GameObject>();
 
-    private const int score_max = 12;
     public UiScript ui;
-
-    // for android control
-    private bool start_pressed_state = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,39 +27,29 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // launch the ball when starting condition is detected
-        if(!ball_start)
+        // detect starting condition
+        if(ball_start)
         {
-            // detect starting condition
-            if(Input.GetKey("space") || start_pressed_state)
-            {
-                // do this just once
-                ball_start = true; 
+            // do this just once
+            ball_start = false;
 
-                // reset pressed button on android
-                start_pressed_state = false;
+            // enable the ball to move
+            ball_move = true; 
 
-                // ball initial velocity
-                ball_rb.velocity = ball_initial_velocity;
-            }
-            else
-            {
-                // follow the paddle if the game is not started
-                transform.position = paddle.position;
-            }
+            // initial velocity
+            ball_rb.velocity = ball_initial_velocity;
+        }
+
+        // move the ball according to the game state
+        if(!ball_move)
+        {
+            // follow the paddle if the game is not started
+            transform.position = paddle.position;
         }
         else
         {
             // get ball velocity
             ball_last_velocity = ball_rb.velocity;
-
-            // check if we win the game
-            if(ui.check_score())
-            {
-                Debug.Log("WIN : we destroyed all bricks");
-
-                SceneManager.LoadScene("Scenes/win_menu");
-            }
         }
     }
 
@@ -75,7 +60,7 @@ public class BallScript : MonoBehaviour
         if(collision.gameObject.name == "Edge_bottom")
         {
             // reset the game
-            game_reset();
+            ui.game_reset();
         }
         else
         {
@@ -105,11 +90,11 @@ public class BallScript : MonoBehaviour
         ball_rb.velocity = bounce_direction * ball_speed;
     }
 
-    // method to reset game parameters
-    private void game_reset()
+    // reset ball and bricks position
+    public void reset_ball_and_bricks()
     {
         // reset the starting condition
-        ball_start = false;
+        reset_ball();
 
         // activate destroyed bricks
         foreach(GameObject brick in destroyed_bricks)
@@ -119,9 +104,18 @@ public class BallScript : MonoBehaviour
 
         // clear the destroyed brick list
         destroyed_bricks.Clear();
+    }
 
-        // reset the score
-        ui.reset_score();
+    // function to launch the ball
+    public void launch_ball()
+    {
+        ball_start = true;
+    }
+
+    // function to reset ball position
+    private void reset_ball()
+    {
+        ball_move = false;
     }
 
     // update the score according to the destroyed brick
@@ -147,10 +141,5 @@ public class BallScript : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void start_pressed()
-    {
-        start_pressed_state = true;
     }
 }
